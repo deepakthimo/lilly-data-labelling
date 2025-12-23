@@ -1,0 +1,17 @@
+requests
+
+# PDF Processing
+PyMuPDF
+pypdf
+llama-cloud-services
+llama-parse
+
+google-api-python-client 
+google-auth 
+google-auth-oauthlib
+google-auth-httplib2
+
+langchain-openai
+langchain
+
+pillow

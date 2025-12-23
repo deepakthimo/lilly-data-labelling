@@ -1,0 +1,20 @@
+# Python Virtual Environment
+venv/
+
+# Secrets and Credentials
+credentials.json
+token.json
+.env
+
+# Output and Testing folders
+bbox_visualizations/
+testing/
+
+# Python compiled files (Standard practice)
+__pycache__/
+*.pyc
+
+debug_extracted.md
+debug_final_output.md
+debug_preprocessed.md
+debug_structured_toc.json
