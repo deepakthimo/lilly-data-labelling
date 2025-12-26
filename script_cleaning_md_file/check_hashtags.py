@@ -21,11 +21,14 @@ def main():
 
     # Extract headings
     headings = extract_headings(md_text)
-
+    
     # Print results
     for heading in headings:
         print(heading)
 
+    print("=" * 50)
+    print (f"\n Total Number of Heading and Sub-Heading: {len(headings)} \n")
+    print("=" * 50)
 
 if __name__ == "__main__":
     main()

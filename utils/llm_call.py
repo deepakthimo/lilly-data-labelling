@@ -96,10 +96,10 @@ async def cortex_call_llm_for_toc_extraction(prompt: str, cookie: str, max_retri
     # These control the model behavior
     params = {
     "q": prompt,
-    "stream": "false",
-    "no_summary": "false",
-    "workflow_timeout": 2600,
-    "background_job": "false"
+    # "stream": "false",
+    # "no_summary": "false",
+    # "workflow_timeout": 2600,
+    # "background_job": "false"
     }
 
     headers = {

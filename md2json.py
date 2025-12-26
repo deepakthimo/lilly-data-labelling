@@ -80,6 +80,14 @@ def process_json_conversion(filename):
         print("   -> Updating Sheet Status to 'Done'...")
         # 'K' is the column for JSON_Status based on your table
         update_cell(row_index, 'K', "Done")
+
+        print("=" * 50)
+        print(f"\n Total Instructions in JSON: {len(json_obj)} \n")
+        print("=" * 50)
+
+        instructions = [i['instructions'] for i in json_obj]
+        print(instructions, sep="\n")
+
         
         print("--- Process Complete ---")
 
