@@ -1,8 +1,19 @@
 import argparse
+import re
 
 def extract_headings(md_text):
-    return [line for line in md_text.splitlines() if line.lstrip().startswith("#")]
+    heading_pattern = re.compile(
+        r'^(#+)\s+(\d+(?:\.\d+)*\.?)\s+(.*)$'
+    )
 
+    headings = []
+
+    for line in md_text.splitlines():
+        line = line.rstrip()
+        if heading_pattern.match(line):
+            headings.append(line)
+
+    return headings
 
 def main():
     parser = argparse.ArgumentParser(

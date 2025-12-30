@@ -73,7 +73,15 @@ def upload_or_update_file(content, filename, folder_id, mime_type='text/markdown
     results = drive_service.files().list(q=query, fields="files(id, webViewLink)").execute()
     files = results.get('files', [])
 
-    media = MediaIoBaseUpload(BytesIO(content.encode('utf-8')), mimetype=mime_type, resumable=True)
+    # 2. Normalize content to bytes (CRITICAL FIX)
+    if isinstance(content, str):
+        content_bytes = content.encode("utf-8")
+    elif isinstance(content, bytes):
+        content_bytes = content
+    else:
+        raise TypeError("content must be str or bytes")
+
+    media = MediaIoBaseUpload(BytesIO(content_bytes), mimetype=mime_type, resumable=True)
 
     if files:
         # UPDATE existing

@@ -1,5 +1,4 @@
-import re
-
+import argparse
 from pathlib import Path
 import re
 
@@ -17,20 +16,27 @@ def clean_md_text(text):
 
     return cleaned_text
 
+def main():
+    parser = argparse.ArgumentParser(
+        description="Clean Markdown file by merging subsection numbers with titles"
+    )
+    parser.add_argument(
+        "file_path",
+        help="Path to the Markdown (.md) file"
+    )
 
-if __name__ == "__main__":
-    file_path = Path(r"C:\Users\DeepakTM\Music\Projects\Lilly - Data Labelling\script_cleaning_md_file\NCT03153410_raw.md")
+    args = parser.parse_args()
 
     # Read original file
-    with open(file_path, "r", encoding="utf-8") as f:
+    with open(args.file_path, "r", encoding="utf-8") as f:
         md_text = f.read()
 
     # Clean text
     cleaned_text = clean_md_text(md_text)
 
     # Create new filename: *_cleaned.md
-    cleaned_file_path = file_path.with_name(
-        file_path.stem + "_cleaned.md"
+    cleaned_file_path = Path(args.file_path).with_name(
+        Path(args.file_path).stem + "_merged_section_title_number.md"
     )
 
     # Write cleaned content to new file
@@ -38,6 +44,10 @@ if __name__ == "__main__":
         f.write(cleaned_text)
 
     print(f"Cleaned file saved to: {cleaned_file_path}")
+
+
+if __name__ == "__main__":
+    main()
 
 
 

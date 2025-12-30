@@ -115,7 +115,10 @@ def md_to_flat_json(text, title, phase):
     def flatten_recursive(nodes):
         for node in nodes:
             # Create the formatted title: "Number Title"
-            formatted_title = f"Generate section {node['section_number']} {node['title']} of a {phase} clinical protocol: {title}"
+            if phase:
+                formatted_title = f"Generate section {node['section_number']} {node['title']} of a {phase} clinical protocol: {title}"
+            else:
+                formatted_title = f"Generate section {node['section_number']} {node['title']} of a clinical protocol: {title}"
             
             # Append to master list
             final_flat_list.append({
