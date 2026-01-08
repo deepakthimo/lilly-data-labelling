@@ -16,13 +16,7 @@ from utils.gcp import (
 )
 
 from utils.json_constructor import md_to_flat_json
-
-def extract_headings(md_text):
-    return [
-        line.strip()
-        for line in md_text.splitlines()
-        if line.lstrip().startswith("#")
-    ]
+from script_cleaning_md_file.check_hashtags import extract_headings
 
 def extract_instructions(json_obj):
     return [
@@ -68,7 +62,6 @@ def process_json_conversion(filename):
     title = row_data[2] if len(row_data) > 2 else ""
     phase = row_data[3] if len(row_data) > 3 else ""
     audit_status = row_data[9] if len(row_data) > 4 else ""
-    no_of_headings = int(row_data[10])
 
     print(f"   -> Found Row {row_index}. Title: '{title}', Audit Status: '{audit_status}'")
 
@@ -103,6 +96,14 @@ def process_json_conversion(filename):
         num_headings = len(headings)
         num_instructions = len(instructions)
 
+        # updating "K" column with number of heading validated
+        update_cell(row_index, "K", num_headings)
+        # update "N" column with the number of instructions created 
+        update_cell(row_index, "N", num_instructions)
+
+        print(f"Number of Heading in MD: {num_headings}")
+        print(f"Number of Instructions in JSON: {num_instructions}")
+
         # checking if the Number of Instruction created == No of Heading
         if num_headings == num_instructions:
     
@@ -120,7 +121,6 @@ def process_json_conversion(filename):
                 mime_type='application/json'
             )
             print(f"   -> JSON Drive Link: {json_link}")
-
 
             # 7. Update Sheet (Column L: JSON_Status to "Done")
             print("   -> Updating Sheet Status to 'Done'...")
@@ -155,14 +155,10 @@ def process_json_conversion(filename):
             )
             # 'M' is the column for ZIP_Status based on your table
             update_cell(row_index, 'M', "Done")
+
             print("--- Process Complete ---")
 
         else:
-            print("=" * 50)
-            print(f"Total Number of headings: {no_of_headings}")
-            print(f"Total Instructions in JSON: {len(json_obj)}")
-            print("=" * 50)
-
             max_len = max(num_headings, num_instructions)
 
             print("=" * 60)

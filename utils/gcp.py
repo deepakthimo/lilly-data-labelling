@@ -15,8 +15,6 @@ SPREADSHEET_ID = '1brJxCWtUrCCCMrDe8UTeWLIDZSr_tgWdJEU8tEkKxKY'
 SHEET_NAME = 'main'
 PARENT_DRIVE_FOLDER_ID = '1Rbc_QD-PMOIb3qQgoC_tUOnoXPBQwEB9'
 
-TITLE = "<Enter Project Title Here>"
-
 # Scopes (Read/Write)
 SCOPES = [
     'https://www.googleapis.com/auth/spreadsheets', 
