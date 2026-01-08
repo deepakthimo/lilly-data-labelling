@@ -18,3 +18,6 @@ debug_extracted.md
 debug_final_output.md
 debug_preprocessed.md
 debug_structured_toc.json
+
+data/
+report/
